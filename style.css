@@ -1,134 +1,308 @@
-/* sets the entire thing to no margins and padding  as well as sets the contents inside the border using border box*/
+/* this is a css reset, I'm getting rid of the default margins and padding, etc.*/
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+padding: 0;
+margin: 0;
+text-decoration: none;
+list-style: none;
+box-sizing: border-box;
 }
 
-/* sets the display for images to block by default */
-img{
-    display: block;
-}
-
-/* this is the styling for the header */
-.header{
-    font-family: Tahoma, sans-serif;
-    font-weight: 700; /* makes the header text thick! */
-    background: #17072b;
-    color: white;
-    grid-area: hd; /* this is an identifier for the grid area which will be for later */
-    display: grid;
-    place-content: center center; /* sets the items in the grid centered vertically and horizontally */
-}
-
-.navbar{
-    padding: 1em;
-}
-
-.headdiv{
-    text-align: center;
-    padding: 2em;
-}
-
-h1{
-    font-size: 4rem;
-    display: inline-block;
-    border-bottom: 8px solid;
-}
-
-h2{
-    font-family: Tahoma, sans-serif;
-    font-weight: 700;
-    font-size: 3rem;
-    padding-top: 2rem;
-    display: inline-block;
-    border-bottom: 4px solid;
-}
-
-.button{
-  font-family: Arial, Helvetica, sans-serif; 
-  font-size: 2.5rem;
-  font-weight: 400;
-  text-decoration: none; 
-  color: white;
-  padding-inline: .5em;
-}
-
-/* where most of the magic happens, I used grid templates to divide the page into columns and rows */
+/* sets the default font and background color to a dark color */
 
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    color: black;
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* this means I divided into columns of 3 equal fractions */
-    grid-template-rows: .75fr 2fr 3em; /* the rows are divided into different sizes */
-    grid-template-areas: /* the template areas let me easily set how to divide the header, main, sub, and footer divs by giving them a name and area! */
-    "hd hd hd"
-    "mn mn sb"
-    "ft ft ft";
-    column-gap: 1.25rem; /* these set the column and row gaps */
-    row-gap: 1rem;
+font-family: 'Open Sans', sans-serif;
+background-color:rgb(17, 16, 24);
 }
 
-.box{
-    padding-inline: 1em;
+/* this is the nav bar style
+position is absolute so it stays squarely at the top
+z-index: 1 lets it show on top of everything
+I use em/rem so the sizes scale with the parent containers
+*/
+
+nav{
+height: 2rem;
+width: 100%;
+position: absolute;
+top: 0px;
+z-index: 1;
+text-align: center;
+color: lightsteelblue;
+}
+
+/* used unordered lists to make the nav bar
+margin auto centers it
+display inline block shows it side by side instead of top to bottom like normal lists
+the padding is for spacing so it looks clean
+ */
+
+nav ul{
+margin:auto;
+}
+
+nav ul li{
+display: inline-block;
+margin: 0;
+padding-top: 1em;
+padding-right: 2em;
+padding-left: 2em;
+padding-bottom: 1em;
+}
+
+/* changes all the characters in each link to uppercase */
+nav ul li a{
+text-transform: uppercase;
+color: lightsteelblue;
+}
+
+/* this is for the banner, my name */
+nav h1 a{
+font-family: 'Montserrat', 'Lato', sans-serif;
+font-size: 4rem;
+text-align: center;
+opacity: 0.8;
+color: lightsteelblue;
+}
+
+/* cool transition that changes color when you mouseover any link */
+nav a::before{
+color: lightsteelblue;
+transition: .5s ease;
+}
+
+nav a:hover{
+color:steelblue;
+transition: .5s ease;
+
+}
+
+
+h2{
+font-family: 'Montserrat', 'Lato', sans-serif;
+font-size: 1.75rem;
+text-align: center;
+opacity: 0.8;
+padding: 0.75rem;
+
+}
+
+h3{
+font-family:Verdana, Geneva, Tahoma, sans-serif;
+font-size: 1.4rem;
+text-align: center;
+opacity: 0.8;
+
+}
+/* keeps the image in the background centered and taking up the entire viewport */
+header{
+color: lightsteelblue;
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+/* these classes keep the photo slideshow in the background as well as darkens it for easy readability */
+header:before{
+content: "";
+position: absolute;
+height: 100%;
+width: 100%;
+background-color: black;
+opacity: .65;
+z-index: -1;
+}
+
+.background{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -5;
+}
+
+/* sets the text to center */
+p{
+text-align: center;
+font-size: 1.6rem;
+opacity: 0.8;
+width: 60%;
+margin-inline: auto;
+}
+
+/* identifies the images for the background transitions and sets the animations for them
+opacity set to 0 by default
+*/
+.slideshow{
+position: absolute;
+width: 100%;
+height: 100%;
+object-fit: cover;
+opacity: 0;
+transition: opacity;
+transition-duration: 1s;
+transition-timing-function: ease-in-out;
+}
+/* this  sets the opacity to 1, so it appears in the background creating a fade animation as the images change*/
+.show{
+opacity: 1;
+z-index: -1;
+transition: none;
+}
+
+main{
+font-family: 'Open Sans', sans-serif;
+}
+/* I use this to make a blank space that I can control the size*/
+.space{
+display: block;
+min-height: 10rem;
+width: 100%;
+}
+
+.container{
+position: relative;
+width: 75%;
+max-width: 75%;
+margin-bottom: 4rem;
+margin-inline: auto;
+}
+/* sets the heigh and width of the image as well as object-fit: cover, so the image doesnt get stretched */
+.img{
+display: block;
+object-fit: cover;
+height: 900px;
+width: 100%;
+}
+/* puts a caption that appears when you hover over it the image */
+.overlay{
+position: absolute;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+width: 100%;
+transition: .5s ease;
+opacity:0;
+}
+
+.overlay p{
+color: white;
+font-size: 1.2rem;
+padding: 1rem;
+text-align: center;
+}
+
+.container:hover .overlay {
+opacity: 1;
+  }
+
+.art{
+margin-inline: 10%;
+}
+
+.art img{
+max-width: 100%;
+height: auto;
+vertical-align: middle;
+display: inline-block;
+}
+/* flex boxes for the art/design gallery */
+.gallery div{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.gallery div img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+/* display grid creates a grid
+the template columns automatically makes a grid that fits the width of the container, 250px wide for each (1fr) or fraction of the available space repeating until the container is filled
+the rows are each 200px
+grid gap gives a gap between each grid's "box"
+and grid auto flow: dense makes it so that it tried to fill in each available box automatically
+*/
+.gallery {
+display: grid;
+grid-gap: 1rem;
+grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+grid-auto-rows: 200px;
+grid-auto-flow: dense;
+}
+/* these are subclasses that change how many boxes the image can fill */
+.gallery .wide{
+grid-column: span 2;
+}
+.gallery .tall{
+grid-row: span 2;
+}
+.gallery .big{
+grid-column: span 2;
+grid-row: span 2;
+}
+.gallery .huge{
+grid-column: span 2;
+grid-row: span 3;
+}
+
+.contact{
+position: absolute;
+height: 100vh;
+width: 100%;
+top: 35%;
+text-align: center;
+color: lightsteelblue;
+}
+
+.contact h3{
+  font-size: 1.75rem;
+  color: lightskyblue;
+}
+
+.contact a{
+  color: lightsteelblue;
+}
+
+/* centers the embeded video and audio reels */
+.reelscenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+}
+/* makes the audio bars the same length as the youtube embedded video */
+.reelscenter audio{
+  width: 560px;
+}
+/* small caption under each reel describing them */
+.caption {
+  font-size: .75rem;
+  color: lightsteelblue;
+}
+
+
+/* adds a responsiveness to the website that makes the font sizes and some of the spacing smaller when scaled down to smaller window sizes/screens */
+@media screen and (max-width: 900px){
+nav ul li a{
+font-size: .75rem;
+}
+nav ul li{
+font-size: .75rem;
+padding: .5rem;
+}
+
+nav h1 a{
+font-size: 2.5rem;
 }
 
 p{
-    font-size: 1.75em;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+font-size: 1rem;
+
 }
 
-.main{
-    padding-inline: 1em;
-    grid-area: mn;
-    display: grid;
-}
-
-.main img{
-    height: auto;
-    width: 100%;
-    display: grid;
-    justify-content: end; /* makes it so the image is at the bottom of the box */
-}
-
-.sidebar{
-    color: white;
-    background: #172d67;
-    padding-inline: 3rem;
-    grid-area: sb;
-    display: grid;
-}
-
-.sidebar ul{
-    font-size: 1.75em;
-    padding-top: 1em;
-    padding-left: .5em;
-    list-style-type: "- "; /* turns the bullets into dashes instead */
-}
-
-.sidebar li{
-    padding: .5em 0 .5em 0;
-}
-
-.sideimage {
-    padding-top: 5em;
-    padding-bottom: 1em;
-    display: grid;
-    grid-template-columns: auto auto; /* sets a grid to divide the area in to two columns so that the images are side by side */
-    gap: 1em;
-}
-
-
-.footer{
-    font-size: 1.75em;
-    color:white;
-    background: #8c15e9;
-    grid-area: ft;
-    margin: 0;
-    display: grid;
-    place-content: center center;
+.space{
+  display: block;
+  min-height: 5rem;
+  width: 100%;
+  }
 }
